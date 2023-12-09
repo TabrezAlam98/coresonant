@@ -13,7 +13,15 @@ const TodoItem = () => {
     };
     setData([...data, payload]);
   };
+ 
+  const handleDelete=(id)=>{
+    const deleteTodo=data.filter((e)=>(e.id !==id))
+    setData(deleteTodo)
+
+  }
+
   console.log(data);
+
   return (
     <>
       <div>
@@ -32,7 +40,7 @@ const TodoItem = () => {
               <p>
                 {el.title} </p>
                 <button>edit</button>
-                <button>delete</button>
+                <button onClick={()=>handleDelete(el.id)}>delete</button>
              
             </div>
           );
