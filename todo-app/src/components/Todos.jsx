@@ -1,15 +1,17 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios'
+import style from './Todos.module.css'
+import TodoItem from './TodoItem'
 
 
 const Todos = () => {
-  const [todo,setTodo]=useState([])
+  const [data,setData]=useState([])
   
   useEffect(()=>{
     axios('https://jsonplaceholder.typicode.com/users/1/todos')
   
     .then((d)=>{
-      setTodo(d.data)
+      setData(d.data)
   
      
     })
@@ -18,14 +20,20 @@ const Todos = () => {
     })
   },[])
  
-  console.log(todo)
+  console.log(data)
  
 
   return (
-    <div>todos
-      {todo.map((el)=>{
-        return<div>
+    <div>
+      <TodoItem/>
+      {data.map((el)=>{
+        return<div className={style.main}>
+       
+          {/* <p className={style.id}>{el.id}.</p> */}
           <p>{el.title}</p>
+          <button>edit</button>
+          <button>delete</button>
+        
         </div>
       })}
     </div>

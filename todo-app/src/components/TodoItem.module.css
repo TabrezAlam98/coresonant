@@ -1,0 +1,17 @@
+.container{
+    border-bottom: 1px solid gray;
+    width: 60%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+}
+.container:hover{
+    background-color: gray;
+    color: white;
+}
+button{
+margin-left: 20px;
+cursor: pointer;
+}
