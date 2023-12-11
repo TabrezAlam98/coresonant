@@ -1,26 +1,22 @@
-import React,{useEffect, useState} from 'react'
-import axios from 'axios'
-import style from './Todos.module.css'
-import TodoItem from './TodoItem'
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import style from "./Todos.module.css";
+import TodoItem from "./TodoItem";
 
 const Todos = () => {
-  const [data,setData]=useState([])
+  const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
-  
-  useEffect(()=>{
-    axios('https://jsonplaceholder.typicode.com/users/1/todos')
-  
-    .then((d)=>{
-      setData(d.data)
-  
-     
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  },[])
- 
+
+  useEffect(() => {
+    axios("https://jsonplaceholder.typicode.com/users/1/todos")
+      .then((d) => {
+        setData(d.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const handleDelete = (id) => {
     const deleteTodo = data.filter((e) => e.id !== id);
     setData(deleteTodo);
@@ -47,44 +43,52 @@ const Todos = () => {
     );
   };
 
-
-  console.log(data)
- 
+  // console.log(data);
 
   return (
     <div>
-        <TodoItem/>
-       {editingItem && (
-          <form onSubmit={handleUpdate}>
-            <input
-              type="text"
-              value={editingItem.title}
-              onChange={(e) =>
-                setEditingItem({
-                  ...editingItem,
-                  title: e.target.value,
-                })
-              }
-            />
-            <button className={style.addBtn} type="submit">
-              Update
+      <TodoItem />
+      {editingItem && (
+        <form onSubmit={handleUpdate}>
+          <input
+            type="text"
+            value={editingItem.title}
+            onChange={(e) =>
+              setEditingItem({
+                ...editingItem,
+                title: e.target.value,
+              })
+            }
+          />
+          <button className={style.addBtn} type="submit">
+            Update
+          </button>
+        </form>
+      )}
+
+      {data.map((el) => {
+        return (
+          <div className={style.main}>
+            <p style={{ background: el.isComplete ? "green" : "none " }}>
+              {el.title}
+            </p>
+            <button onClick={() => handleEdit(el)} className={style.editBtn}>
+              <i class="fa-regular fa-pen-to-square"></i>
             </button>
-          </form>
-        )}
-    
-      {data.map((el)=>{
-        return<div className={style.main}>
-       
-          <p style={{ background: el.isComplete ? "green" : "none " }}>{el.title}</p>
-          <button onClick={() => handleEdit(el)} className={style.editBtn}><i class="fa-regular fa-pen-to-square"></i></button>
-          <button onClick={() => handleDelete(el.id)} className={style.delBtn}><i class="fa-solid fa-trash"></i></button>
-          <button onClick={() => handleToggle(el.id)}>
-                  {el.isComplete ? "Incomplete" : "Completed"}
-                </button>
-        </div>
+            <button
+              onClick={() => handleDelete(el.id)}
+              className={style.delBtn}
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <button onClick={() => handleToggle(el.id)}>
+              {el.isComplete ? "Incomplete" : "Completed"}
+            </button>
+          </div>
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Todos
+export default Todos;
