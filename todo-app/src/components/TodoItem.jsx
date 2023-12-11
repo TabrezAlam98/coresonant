@@ -61,7 +61,6 @@ const TodoItem = () => {
       </div>
 
       <div>
-        {" "}
         {editingItem && (
           <form onSubmit={handleUpdate}>
             <input
