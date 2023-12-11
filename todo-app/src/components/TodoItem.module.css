@@ -7,6 +7,7 @@
     text-align: center;
     padding: 5px;
 }
+
 .container:hover{
     background-color: gray;
     color: white;
@@ -15,3 +16,34 @@ button{
 margin-left: 20px;
 cursor: pointer;
 }
+.addBtn{
+    height:32px;
+    padding: 8px;
+background-color: teal;
+border: none;
+color: white;
+border-radius: 5px;
+}
+.editBtn{
+border: none;
+background-color: white;
+color: teal;
+}
+.delBtn{
+    border: none;
+background-color: white;
+color: teal;
+}
+.editBtn:hover{
+background-color: gray;
+color: white;
+}
+.delBtn:hover{
+    background-color: gray;
+    color: white; 
+}
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+  }

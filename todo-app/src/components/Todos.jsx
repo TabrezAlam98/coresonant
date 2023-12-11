@@ -29,10 +29,9 @@ const Todos = () => {
       {data.map((el)=>{
         return<div className={style.main}>
        
-          {/* <p className={style.id}>{el.id}.</p> */}
           <p>{el.title}</p>
-          <button>edit</button>
-          <button>delete</button>
+          <button className={style.editBtn}><i class="fa-regular fa-pen-to-square"></i></button>
+          <button className={style.delBtn}><i class="fa-solid fa-trash"></i></button>
         
         </div>
       })}
