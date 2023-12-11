@@ -6,7 +6,6 @@ const TodoItem = () => {
   const [todo, setTodo] = useState("");
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState(null);
-  const [isToggled, setToggle] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = {
@@ -22,10 +21,6 @@ const TodoItem = () => {
     const deleteTodo = data.filter((e) => e.id !== id);
     setData(deleteTodo);
   };
-
-//   const handleToggle = () => {
-//     setToggle(!isToggled);
-//   };
 
   const handleEdit = (el) => {
     setEditingItem(el);
@@ -60,39 +55,56 @@ const TodoItem = () => {
           onChange={(e) => setTodo(e.target.value)}
           require
         />
-        <button className={style.addBtn} onClick={handleSubmit}>add todo</button>
+        <button className={style.addBtn} onClick={handleSubmit}>
+          add todo
+        </button>
       </div>
-      <div> {editingItem && (
-                  <form onSubmit={handleUpdate}>
-                    <input
-                      type="text"
-                      value={editingItem.title}
-                      onChange={(e) =>
-                        setEditingItem({
-                          ...editingItem,
-                          title: e.target.value,
-                        })
-                      }
-                    />
-                    <button className={style.addBtn} type="submit">Update</button>
-                  </form>
-                )}
-                </div>
+
+      <div>
+        {" "}
+        {editingItem && (
+          <form onSubmit={handleUpdate}>
+            <input
+              type="text"
+              value={editingItem.title}
+              onChange={(e) =>
+                setEditingItem({
+                  ...editingItem,
+                  title: e.target.value,
+                })
+              }
+            />
+            <button className={style.addBtn} type="submit">
+              Update
+            </button>
+          </form>
+        )}
+      </div>
       <div>
         {data.map((el) => {
           return (
             <>
               <div className={style.container} key={el.id}>
-                <p  style={{ background: el.isComplete ? 'green' : 'none ' }}>{el.title} </p>
-               
-                <button className={style.editBtn} onClick={() => handleEdit(el)}><i class="fa-regular fa-pen-to-square"></i></button>
-                <button className={style.delBtn} onClick={() => handleDelete(el.id)}><i class="fa-solid fa-trash"></i></button>
-                <button   onClick={() => handleToggle(el.id)}>
-                {el.isComplete ? 'Mark Incomplete' : 'Mark Complete'}
+                <p style={{ background: el.isComplete ? "green" : "none " }}>
+                  {el.title}{" "}
+                </p>
+
+                <button
+                  className={style.editBtn}
+                  onClick={() => handleEdit(el)}
+                >
+                  <i class="fa-regular fa-pen-to-square"></i>
                 </button>
-             
+                <button
+                  className={style.delBtn}
+                  onClick={() => handleDelete(el.id)}
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                <button onClick={() => handleToggle(el.id)}>
+                  {el.isComplete ? "Incomplete" : "Completed"}
+                </button>
               </div>
-             
             </>
           );
         })}
